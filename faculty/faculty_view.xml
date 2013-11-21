@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+  <!-- Defining faculty -->
+
+        <record id="view_faculty_form" model="ir.ui.view">
+            <field name="name">faculty.form</field>
+            <field name="model">school.faculty</field>
+            <field name="arch" type="xml">
+                <form string="Faculty" version="7.0">                   
+                  
+                  <field name="image_medium" widget="image" class="oe_avatar oe_left" options='{"preview_image": "image_medium"}'/>
+                  
+                    <div class="oe_title">
+                        <div class="oe_edit_only">
+                            <label for="first_name"/>
+                        </div>
+                        <div class="address_format">
+
+                            <field name="first_name"  placeholder="First Name" style="width:33%%"/>
+                            <field name="middle_name"  placeholder="Middle Name" style="width:30%%"/>
+                            <field name="last_name"  placeholder="Last Name" style="width:33%%"/>
+                        </div>
+
+                        <div class="oe_edit_only">
+                            <label for="faculty_id"/>                  
+                            <label for="user"/>                            
+                        </div>
+                        <div class="address_format">
+                            <field name="faculty_id" style="width: 15%%"/>
+                            <field name="user" style="width: 50%%"/>
+                        </div>
+                     </div>
+                    <notebook colspan="4">
+                        <page string="Personal">
+                            <group>
+                              <group>
+                                <separator string="Contact Information" colspan="4" />
+                                    <field name="school_address"/>
+                                    <field name="home_address"/>
+                                    <field name="e_mail"/>                                  
+                                    <field name="phone"/> 
+                                    <field name="mobile"/> 
+                                    <field name="imid"/> 
+                            </group>
+                            <group>
+                                <separator string="Demographic Information" colspan="4"/>
+                                    <field name="nationalty"/> 
+                                    <field name="d_o_b"/> 
+                                    <field name="gender"/> 
+                                    <field name="mother_tongue"/> 
+                                    <field name="marital_status"/> 
+                                    <field name="id_no"/> 
+                            </group>
+                            <group>
+                                <separator string="School Information" colspan="4"/>
+                                <field name="school"/> 
+                                <field name="department"/> 
+                                <field name="designation"/>
+                            </group>
+                            </group>
+
+                            <div class="oe_edit_only">
+                                <label for="note"/>
+                            </div>
+                            <field name="note"/>
+                            <group>
+                            <group>
+                                <separator string="" colspan="4"/>
+                            </group>
+                            </group>
+                        </page>
+                        <page string="Academic">
+                            <separator string="Academic History" colspan="4"/>
+                            <field name="academic_history" >
+                                <tree editable="top">
+                                    <field name="institute"/>
+                                    <field name="degree"/>
+                                    <field name="from"/>
+                                    <field name="to"/> 
+                                    <field name="result"/>                    
+                                </tree>
+                            </field>          
+                            <separator string="Certification" colspan="4"/>
+                            <field name="certification">
+                                <tree editable="top">
+                                    <field name="name"/>
+                                    <field name="institute"/>
+                                    <field name="valid_upto"/>
+                                </tree>
+                            </field>          
+                        </page>
+                    </notebook>  
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_faculty_tree" model="ir.ui.view">
+            <field name="name">school.faculty.tree</field>
+            <field name="model">school.faculty</field>
+            <field name="arch" type="xml">
+                <tree string="Faculty">
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <field name="faculty_id"/>
+                    <field name="department"/>
+                    <field name="designation"/>
+               </tree>
+           </field>
+        </record>
+
+        <record id="action_faculty_form" model="ir.actions.act_window">
+            <field name="name">Faculty</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.faculty</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_faculty_tree"/>
+        </record>
+
+	<menuitem id="menu_faculty2" name="Faculty" 
+        		parent="school.menu_school_faculty" action="action_faculty_form"/>
+
+  </data>
+</openerp>   

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+      <!-- Defining Admission -->
+      
+      <!--<record id="school_admission_kanban_view" model="ir.ui.view">
+            <field name="name">school.admission.kanban.view</field>
+            <field name="model">school.admission</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="first_name"/>
+                    <field name="middle_name"/>
+                    <field name="last_name"/>
+                    <field name="admission_no"/>
+                    <field name="admission_date"/>
+                    <field name="school"/>
+                    <field name="course"/>
+                    
+                 </kanban>
+             </field>
+        </record> -->           
+            
+        
+		<record id="view_admission_form" model="ir.ui.view">
+            <field name="name">admission.form.demo</field>
+            <field name="model">school.admission</field>
+            <field name="arch" type="xml">
+                <form string="Application" version="7.0">
+              <header>
+                <button name="create_students" type="object" string="Create Student1" states="admitted"/>
+                <button name="confirm_application" type="object" string="Confirm Application" states="draft"/>
+                <button name="confirm_admission" type="object" string="Confirm Admission" states="applied"/>
+                <button name="cancel" type="object" string="Cancel" states="draft,applied,admitted"/>
+                <field name="state" widget="statusbar" statusbar_visible="draft,applied,admitted" readonly="1"/>
+              </header>
+                    <sheet>    
+                        <field name="image_medium" widget="image" class="oe_avatar oe_left" options='{"preview_image": "image_medium"}'/>
+                        <div class="oe_title">
+                            <div class="oe_edit_only">
+                                <label for="first_name"/>
+                            </div>
+                            <div class="address_format">
+                                <field name="first_name" placeholder="First Name" style="width: 33%%"/>
+                                <field name="middle_name" placeholder="Middle Name" style="width: 30%%"/>
+                                <field name="last_name" placeholder="Last Name" style="width: 33%%"/>
+                            </div>
+                            <div class="address_format">
+                                <div class="oe_edit_only">
+                                    <label for="admission_date" style="width: 30%%"/>
+                                    <label for="admission_no" style="width: 67%%"/>
+                                </div>
+                                <field name="admission_date" style="width: 25%%" attrs="{'required':[('state','=','applied')], 'readonly':[('state','=','admitted')]}"/>
+                                <field name="admission_no" style="width: 72%%"/>
+                            </div>
+                            
+                    </div>
+                    <div class="oe_right oe_button_box" name="buttons"> </div>
+                    <newline/>
+                    <notebook colspan="4">
+                        <page string="Personal">
+                            <group>
+                                <group>
+                                    <separator string="Admission Information"  colspan="2"/>
+                                    <field name="school" attrs="{'required':[('state','=','applied')], 'readonly':[('state','=','admitted')]}"/>
+                                    <field name="course" attrs="{'required':[('state','=','applied')], 'readonly':[('state','=','admitted')]}"/>
+                                    <field name="category" attrs="{'required':[('state','=','applied')], 'readonly':[('state','=','admitted')]}"/>
+                                    <field name="fee"/>
+                                    
+                                </group>
+                                <group>
+                                    <separator string="Contact Information" colspan="2"/>
+                                    <field name="home_address"/>
+                                    <field name="email"/>
+                                    <field name="phone" attrs="{'required':[('state','=','applied')], 'readonly':[('state','=','admitted')]}"/>
+                                    <field name="mobile"/>
+                                </group>
+                               <newline/>
+                                <group>
+                                    <separator string="Family Information" colspan="2"/>
+                                    <field name="father" attrs="{'required':[('state','=','applied')], 'readonly':[('state','=','admitted')]}"/>
+                                    <field name="occupation_father" attrs="{'required':[('state','=','applied')], 'readonly':[('state','=','admitted')]}"/>
+                                    <field name="mother" attrs="{'required':[('state','=','applied')], 'readonly':[('state','=','admitted')]}"/>
+                                    <field name="occupation_mother" attrs="{'required':[('state','=','applied')], 'readonly':[('state','=','admitted')]}"/>
+                                    <field name="sibling" attrs="{'required':[('state','=','applied')], 'readonly':[('state','=','admitted')]}"/>
+                                    
+                                </group>
+                                <group>
+                                    <separator string="Demographic Information" colspan="2"/>
+                                    <field name="nationality" attrs="{'required':[('state','=','applied')], 'readonly':[('state','=','admitted')]}"/>
+                                    <field name="dob" attrs="{'required':[('state','=','applied')], 'readonly':[('state','=','admitted')]}"/>
+                                    <field name="gender" attrs="{'required':[('state','=','applied')], 'readonly':[('state','=','admitted')]}"/>
+                                    
+                                </group>
+                            </group>
+                            <div class="oe_edit_only">
+                                <label for="note"/>
+                            </div>
+                            <field name="note"/> 
+                        </page>
+                   
+                     <page string="Previous Education">
+                        <field name="previous_education" >
+                          <form string="Info">
+                                <field name="institute"/>
+                                <field name="degree"/>
+                                <field name="from"/>
+                                <field name="to"/>
+                                <field name="result"/>
+                             </form>
+                         <tree string="Info" editable="boolean">
+                                <field name="institute"/>
+                                <field name="degree"/>
+                                <field name="from"/>
+                                <field name="to"/>
+                                <field name="result"/>
+                            </tree> 
+                        </field>
+                     </page>
+                 </notebook>
+                 </sheet>  
+               </form>
+            </field>
+        </record>
+        
+        
+        <record id="view_admission_tree" model="ir.ui.view">
+            <field name="name">admission.tree.demo</field>
+            <field name="model">school.admission</field>
+            <field name="arch" type="xml">
+                <tree string="Application" version="7.0">
+                    <field name="admission_date"/>
+                    <field name="admission_no"/>
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <field name="category"/>
+                    <field name="school"/>
+                    <field name="course"/>
+                    <field name="state"/>
+                                  
+                </tree>
+            </field>
+        </record>
+        
+      
+         <!-- <record id="action_admission_kanban" model="ir.actions.act_window">
+            <field name="name">Admisssion</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.admission</field>
+            <field name="view_type">kanban</field>
+            <field name="domain">[('state','in',('draft','applied'))]</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" ref="school_admission_kanban_view"/>
+        </record>
+           <menuitem id="menu_school_admission5" name="Application" 
+        		       parent="school.menu_school_admission" action="action_admission_kanban"/>-->
+
+ 
+          <record id="action_admission_form" model="ir.actions.act_window">
+            <field name="name">Admisssion</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.admission</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('state','in',('draft','applied'))]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_admission_tree"/>
+        </record>
+
+            <menuitem id="menu_school_admission2" name="Application" 
+        		       parent="school.menu_school_admission" action="action_admission_form"/>
+           
+
+          <record id="action_admission_form_admitted" model="ir.actions.act_window">
+            <field name="name">Admitted</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.admission</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('state','=','admitted')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_admission_tree"/>
+        </record>
+
+            <menuitem id="menu_school_admission3" name="Admitted" 
+        		       parent="school.menu_school_admission" action="action_admission_form_admitted"/>
+               
+         <record id="action_admission_form_cancelled" model="ir.actions.act_window">
+            <field name="name">Cancelled</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.admission</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('state','=','cancel')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_admission_tree"/>
+        </record>
+
+            <menuitem id="menu_school_admission4" name="Cancelled" 
+        		       parent="school.menu_school_admission" action="action_admission_form_cancelled"/>
+               
+
+    </data> 
+ </openerp>      

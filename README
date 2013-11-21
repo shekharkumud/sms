@@ -1,0 +1,57 @@
+This is a OpenERP project Please install all the modules in OpenERP
+
+There are 5 modules 
+1. School
+2. Faculty
+3. Student
+4. Schedule
+5. Admission
+
+School-module
+    This is the primary module which contains the main menuitem and the 
+    dependencies to be installed.
+    
+School-faculty
+    This module stores all the information of all faculty to the database.
+    the informations include
+    1.Personal information include (IMAGE)(additional)
+    2.Demographic information(additional)
+    3.Contact informaion
+    4.School information
+    
+School-admission(additional)
+    This module creates new entries of student and is verified by admin 
+    for correctness and if all entries are correct then a new record of a 
+    student is made by copeing all the information from admission to student
+    module
+    
+School-student
+    This module creates all the new record of students and also takes records 
+    made by admission module and views them by three views
+    1. tree view
+    2. form view
+    3. kanban view(addditional)
+    
+School-schedule
+    This module creates the schedule
+     We have a way to know the schedule of subjects being taught in classes at 
+     different times, for instance: If Class 5th, has the subjects Social 
+     Studies, English and Math, at 11-12, 12-1, 1-2.A simple interface which
+     shows the class name, shows the subjects and the times for these subjects 
+     taught in class is there.
+     There is action event registered to button (Confirm Schedule) 
+     if this event is perfomed (button clicked)
+     then
+     1. if the record contains a new faculty record then a new record is made 
+     and the schedule is copied to the respectively
+     2. else if the record contains the faculty already in the schedule record
+        then the record is only modified not new.
+     3. if the time slot alloted is already booked then the record is not 
+     modified in the faculty time table
+     
+ Finally, it is possible to track what teachers are taking what subjects, and what class. It is also possible to know a teacher's schedule by the class and the subject he/she is taking.
+ 
+ Thankyou,
+ Developed By,
+ Kumud Shekhar
+     

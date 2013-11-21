@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+         
+        <!-- Student Form -->
+
+        <record id="view_student_form" model="ir.ui.view">
+            <field name="name">student.form.demo</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <form string="Student" version="7.0">
+                  <header>
+                        <button name="confirm_students" string="Confirm Students" type="object"/>
+                         <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,alumni" readonly="1"/>
+                    </header>
+                    <sheet>
+                    <field name="image_medium" widget="image" class="oe_avatar oe_left" options='{"preview_image": "image_medium"}'/>
+                    
+                    <div class="oe_title">
+                        <div class="oe_edit_only">
+                            <label for="first_name"/>
+                        </div>
+                        <div class="address_format">
+                            <field name="first_name" placeholder="First Name" style="width: 33%%"/>
+                            <field name="middle_name" placeholder="Middle Name" style="width: 30%%"/>
+                            <field name="last_name" placeholder="Last Name" style="width: 33%%"/>
+                        </div>
+                        <div class="oe_edit_only">
+                            <label for="student_id"/> - 
+                            <field name="student_id"/>
+                        </div>
+                    </div>
+                       <newline/>
+                        <notebook colspan="4">
+                            <page string="Personal">
+                                <group>
+                                    <group>
+                                        <separator string="Contact Information" colspan="2"/>
+                                         <field name="school_address"/>
+                                         <field name="home_address"/>
+                                         <field name="email"/>
+                                         <field name="phone"/>
+                                         <field name="mobile"/>
+                                         <field name="im_id"/>
+                                    </group>
+                                    <group>
+                                        <separator string="Demographic Information" colspan="2"/>
+                                        <field name="nationality"/>
+                                        <field name="date_of_birth"/>
+                                        <field name="gender"/>
+                                        <field name="mother_tongue"/>
+                                        <field name="identification_no"/>
+                                    </group>
+                                     <group>
+                                        <separator string="Family Information" colspan="2"/>
+                                        <field name="father_name"/>
+                                        <field name="occupation_father"/>
+                                        <field name="mother_name"/>
+                                        <field name="occupation_mother"/>
+                                        <field name="sibling"/>
+                                    </group>
+                                    <group>
+                                        <separator string="School Information" colspan="2"/>
+                                        <field name="school"/>
+                                        <field name="course"/>
+                                        <field name="class"/>
+                                        <field name="division"/>
+                                        <field name="roll_no"/>
+                                    </group>
+                                </group>
+                                 <div class="oe_edit_only">
+                                <label for="note1"/>
+                            </div>
+                            <field name="note1"/> 
+                            </page>
+                            <page string="Academics">
+                                 <separator string="Academic History" colspan="4"/>
+                            <field name="academic_history" >
+                                <tree editable="top">
+                                    <field name="prev_school"/>
+                                    <field name="class"/>
+                                    <field name="from"/>
+                                    <field name="to"/> 
+                                    <field name="result"/>                    
+                                </tree>
+                            </field>          
+                            </page>
+                            <page string="Medical">
+                                <group>
+                                     <group>
+                                        <separator string="Doctor Information" colspan="2"/>
+                                        <field name="doctor"/>
+                                        <field name="hospital"/>
+                                        <field name="phone_doc"/>
+                                    </group> 
+                                     <group>
+                                        <separator string="Physical Information" colspan="2"/>
+                                        <field name="bloodgroup"/>
+                                        <field name="weight"/>
+                                        <field name="height"/>
+                                    </group>
+                                </group>
+                                 <group>
+                                    <separator string="Disabilities(if any)" colspan="4"/>
+                                    <group>
+                                        <field name="eyes"/>
+                                        <field name="ears"/>
+                                        <field name="nose_throat"/>
+                                        <field name="respiratory"/>
+                                        <field name="cardiovascular"/>
+                                    </group> 
+                                    <group> 
+                                        <field name="neurological"/>
+                                        <field name="muskoskeletal"/>
+                                         <field name="dermatological"/>
+                                        <field name="blood_pressure"/>
+                                    </group>
+                                </group>
+                                 <div class="oe_edit_only">
+                                <label for="note"/>
+                            </div>
+                            <field name="note"/> 
+                                </page> 
+                        </notebook>
+                    </sheet>
+                 </form>
+           </field>
+        </record>
+        
+        
+                <!-- Partner Kanban View -->
+        <record model="ir.ui.view" id="student_kanban_view">
+            <field name="name">student.kanban.view</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="first_name"/>
+                    <field name="student_id"/>
+                    <field name="school_address"/>
+                    <field name="home_address"/>
+                    <field name="phone"/>
+                    <field name="mobile"/>
+                    <field name="nationality"/>
+                    <field name="date_of_birth"/>
+                    <field name="has_image"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_vignette oe_semantic_html_override">
+                                <a type="open">
+                                    <t t-if="record.has_image.raw_value === true">
+                                        <img t-att-src="kanban_image('school.student', 'image', record.id.value)" class="oe_kanban_image"/>
+                                    </t>
+                                    <t t-if="record.has_image.raw_value === false">
+                                            <img t-att-src='_s +"/student/static/src/img/icon.png"' class="oe_kanban_image"/>
+                                    </t>
+                                </a>
+                                <div class="oe_kanban_details">
+                                    <h4 class="oe_partner_heading"><a type="open"><field name="first_name"/></a></h4>
+                                    <div class="oe_kanban_partner_categories"/>
+                                    <div class="oe_kanban_partner_links"/>
+                                    <ul>
+                                        <li t-if="record.email.raw_value"><a t-attf-href="mailto:#{record.email.raw_value}"><field name="email"/></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        
+        <record id="view_student_tree" model="ir.ui.view">
+            <field name="name">school.student.tree</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <tree string="Student">
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <field name="student_id"/>
+                    <field name="class"/>
+                </tree>
+           </field>
+        </record>
+        
+        <record id="action_student_form_view1" model="ir.actions.act_window.view">
+            <field eval="0" name="sequence"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="student_kanban_view"/>
+            <field name="act_window_id" ref="action_student_form"/>
+        </record>
+        
+        <record id="action_student_form_view2" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_student_form"/>
+            <field name="act_window_id" ref="action_student_form"/>
+        </record>
+        <record id="action_student_tree_view1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_student_tree"/>
+            <field name="act_window_id" ref="action_student_form"/>
+        </record>
+
+        <record id="action_student_form" model="ir.actions.act_window">
+            <field name="name">Students</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.student</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+        
+        <menuitem id="menu_school_students2" name="Students" 
+        		parent="school.menu_school_students" action="action_student_form"/>
+       
+   </data>
+</openerp>	
+    

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+     <menuitem name="Class" id="menu_schedule_class3" parent="school.menu_school_schedule"/>     
+     
+     
+      <!-- Definining Faculty Sheduling -->
+        
+		<record id="view_faculty_schedule_form" model="ir.ui.view">
+            <field name="name">faculty_schedule.form.demo</field>
+            <field name="model">school.faculty_schedule</field>
+            <field name="arch" type="xml">
+                <form string="Faculty Schedule" version="7.0">
+                <sheet>
+                    <div class="oe_edit_only">
+                        <label for="faculty"/>
+                    </div>
+                        <field name="faculty"/>
+                    <group>
+                      <separator string=" " colspan="2"/>
+                        <group >
+                        <separator string=" " colspan="2"/>
+                            <field name="academic_year"/>
+                            <field name="school"/>
+                         </group>
+                         <group>
+                           <separator string=" " colspan="2"/>
+                             <field name="semester"/>
+                          </group>
+                     </group>
+                         <separator string="Time-Table"/>
+                        <field name="time_table" >
+                          <form string="Time Table">
+                                <field name="week_day"/>
+                                <field name="subject"/>
+                                <field name="classes"/>
+                                <field name="division"/>
+                                <field name="start_time" widget="float_time"/>
+                                <field name="end_time" widget="float_time"/>
+                             </form>
+                         <tree string="Info" editable="boolean">
+                                 <field name="week_day"/>
+                                <field name="subject"/>
+                                <field name="classes"/>
+                                <field name="division"/>
+                                <field name="start_time" widget="float_time"/>
+                                <field name="end_time" widget="float_time"/>
+                            </tree> 
+                          </field>
+                             <div class="oe_edit_only">
+                                <label for="notes"/>
+                            </div>
+                            <field name="notes"/> 
+                    </sheet>
+                  </form>
+              </field>
+       </record>
+       
+       
+       
+        <record id="view_faculty_schedule_tree" model="ir.ui.view">
+            <field name="name">faculty_schedule.tree.demo</field>
+            <field name="model">school.faculty_schedule</field>
+            <field name="arch" type="xml">
+                <tree string="Faculty_Schedule" version="7.0">
+                            <field name="faculty"/>
+                            <field name="academic_year"/>
+                            <field name="semester"/>
+                            <field name="school"/>    
+                </tree>
+            </field>
+        </record>
+        
+        
+         <record id="action_faculty_schedule_form" model="ir.actions.act_window">
+            <field name="name">Faculty Schedule</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.faculty_schedule</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_faculty_schedule_tree"/>
+         </record>
+         
+         <menuitem id="menu_school_faculty_schedule" name="Faculty Schedule" 
+        		       parent="school.menu_school_faculty" action="action_faculty_schedule_form"/>
+
+
+        <!-- Student Form -->
+
+        <record id="view_class_form" model="ir.ui.view">
+            <field name="name">class.form.demo</field>
+          
+            <field name="model">school.class_schedule</field>
+            <field name="arch" type="xml">
+                <form string="Class" version="7.0">
+                <header>
+                <button name="confirm_schedule" type="object" string="Confirm Schedule"/>
+               </header>
+                    <sheet>
+                    <div class="oe_edit_only">
+                    <label for="classes"/>
+                    </div>
+                     <field name="classes"/>
+                      <group>
+                      <separator string="" colspan="2"/>
+                      <group>
+                       <separator string="" colspan="2"/>
+                             <field name="academic_year"/>
+                              <field name="school"/>
+                              <field name="course"/>
+                     </group>
+                     <group>
+                     <separator string="" colspan="2"/>
+                             <field name="division"/>
+                             <field name="semester"/>
+                     </group>
+                     </group>
+                        <separator string="Time Table" colspan="2"/>
+                             <field name="time_table" >
+                                <form string="Time Table">
+                                  <field name="week_day"/>
+                                  <field name="subject"/>
+                                  <field name="faculty"/>
+                                  <field name="start_time" widget="float_time"/>
+                                  <field name="end_time" widget="float_time"/>
+                                </form>
+                         <tree string="Info" editable="bottom">
+                                 <field name="week_day"/>
+                                <field name="subject"/>
+                                <field name="faculty"/>
+                                <field name="start_time" widget="float_time"/>
+                                <field name="end_time" widget="float_time"/>
+                            </tree> 
+                          </field>
+                                    <div class="oe_edit_only">
+                                <label for="note"/>
+                            </div>
+                            <field name="note"/> 
+                          </sheet>
+                   </form>
+           </field>
+        </record>
+         <record id="view_class_tree" model="ir.ui.view">
+            <field name="name">class.tree.demo</field>
+            <field name="model">school.class_schedule</field>
+            <field name="arch" type="xml">
+                <tree string="Class" version="7.0">
+                   <field name="classes"/>
+                        <field name="academic_year"/>
+                        <field name="school"/>
+                        <field name="course"/>
+                        <field name="division"/>
+                        <field name="semester"/>
+                   </tree>
+           </field>
+        </record>
+        
+         <record id="action_class_form" model="ir.actions.act_window">
+            <field name="name">Class</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.class_schedule</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_class_tree"/>
+        </record>
+        
+        <menuitem id="menu_schedule_class" name="Class" 
+        		parent="menu_schedule_class3" action="action_class_form"/>
+ 
+
+        		       
+    </data>
+</openerp>
+

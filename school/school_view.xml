@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <menuitem name="School" id="menu_school"/>
+        
+        <!-- Library Menu -->
+        <menuitem name="Library" parent="menu_school" id="menu_school_library"/>
+        
+        <!-- Faculty Menu-->
+        <menuitem name="Faculty" id="menu_school_faculty" parent="menu_school"/>
+
+        <!-- Admission Management-->
+        <menuitem name="Admission" id="menu_school_admission" parent="menu_school"/>
+        
+        <!-- Student Management -->
+        <menuitem name="Students" id="menu_school_students" parent="menu_school"/>
+
+        <!-- Schedules -->
+        <menuitem name="Schedule" id="menu_school_schedule" parent="menu_school"/>
+
+        <!-- Enquiry Management -->
+        <menuitem id="menu_school_enquiry" parent="menu_school" name="Enquiry"/>
+
+        
+    </data>
+</openerp>	
